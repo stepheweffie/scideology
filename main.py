@@ -2,6 +2,7 @@ from nicegui import ui
 from dotenv import load_dotenv
 import body_content
 import os
+
 load_dotenv()
 bg_color = '#4BF8FD'
 menu_classes = 'fixed top-0 right-0 m-3 p-6 rounded-full'
@@ -15,9 +16,10 @@ sans_serif = 'Urbanist, sans-serif'
 main_font = sans_serif
 title = 'Scideology'
 app_name = 'Scideology'
-main_data = 'Welcome, to the blog of blogs. For content creators. To create autonomy.'
-main_page_data = {'main': f'{main_data}'}
-page_data = {}
+main_data = 'Welcome, to the blog of blogs. For content creators. To create autonomy. With content apps.'
+sample_content = 'This is sample content.'
+page_data = {'main': f'{main_data}'}
+main_page_data = page_data['main']
 head_html = '''<link rel="preconnect" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,13 +33,16 @@ head_html = '''<link rel="preconnect" href="https://cdnjs.cloudflare.com/ajax/li
     </style>'''
 body_html = ''''''
 pages = os.getenv("PAGES").split(',')
+page_dict = {page: sample_content for page in pages}
+page_data.update(page_dict)
 
 
 async def page_content(pagename: str):
+    global page_data
     with ui.row().classes('flex flex-row justify-center'):
-        if pagename in pages and pagename != 'main':
-            ui.button(icon='back', color=f'{font_color}').classes(f'{menu_classes}')
-            ui.label(f'{pagename}').style(replace=f'font-family: {font_family}; font-size: {font_size}; color: {font_color}')
+        if pagename in page_data.items() and pagename != 'main':
+            ui.label(f'{pagename}').style(replace=f'font-family: {font_family}; font-size: {font_size}; '
+                                                  f'color: {font_color}')
         await body_content.get(pagename, page_data)
 
 
@@ -72,9 +77,7 @@ async def page_iter(page_name):
         # Create a page for each item in pages
         @ui.page(f'/{page_name.lower()}')
         async def dynamic_page():
-            await generate_content(page_name)
-    else:
-        return ui.label(f'Page {page_name} not found in menu.')
+            await generate_content(page_name.lower)
 
 
 @ui.page('/')
@@ -100,7 +103,7 @@ async def main():
 
     with ui.row().classes('flex flex-row'):
         ui.label(f'{main_data}').style(replace=f'font-family: {main_font}; font-size: {main_font_size}; '
-                                               f'color: {font_color}')
-        # await page_body('main')
+                                               f'color: {font_color}').classes('ml-5')
+        await page_body('main')
 
 ui.run(title=f'{title}', storage_secret='secret_key', dark=False)

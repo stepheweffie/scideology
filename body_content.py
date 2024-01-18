@@ -14,8 +14,9 @@ async def get(page: str, data: dict):
     global pages
     with ui.row().classes('flex flex-row justify-center'):
         if page in pages:
-            content = data[f'{page}']
-            await render(content)
+            if len(data) > 1:
+                content = data[f'{page}']
+                await render(content)
 
 
 async def post(page: str, data: dict):
