@@ -3,8 +3,11 @@ from dotenv import load_dotenv
 
 load_dotenv()
 bg_color = '#4BF8FD'
+footer_classes = f'flex flex-row justify-center bg-gray-100 w-full fixed bottom-0 left-0'
+footer_brand = True
 font_color = '#737373'
 title = 'Scideology'
+app_name = 'Scideology'
 font_family = 'Prata, serif'
 # List of pages
 pages = ['About', 'Contact', 'Social']
@@ -15,10 +18,24 @@ async def page_content(pagename: str):
         ui.label(f'{pagename}').style(replace=f'font-family: {font_family}; font-size: 13.5vw; color: {font_color}')
 
 
+async def page_footer(pagename: str):
+    # footer is closed by default
+    with ui.footer(value=True).classes(f'{footer_classes}').style(replace=f'color: {font_color};'):
+        with ui.column().classes('flex flex-row'):
+            if pagename in pages:
+                for page in pages:
+                    with ui.column().classes('flex flex-row'):
+                        ui.label(f'{page}').style(replace=f'font-family: {font_family}; font-size: 3.5vw; color: light'
+                                                          f'{font_color}')
+            if footer_brand is True:
+                ui.label(f'{app_name}').style(replace=f'font-family: {font_family}; font-size: 13.5vw; color: {font_color}')
+
+
 # Function to generate dynamic content for a page
 async def generate_content(pagename: str):
     # call a function to get the content
     await page_content(pagename)
+    await page_footer(pagename)
 
 
 async def page_iter(page_name):
