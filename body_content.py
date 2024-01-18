@@ -1,8 +1,4 @@
 from nicegui import ui
-from dotenv import load_dotenv
-import os
-load_dotenv()
-pages = os.getenv("PAGES").split(',')
 
 
 async def render(render_list: list):
