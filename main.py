@@ -16,8 +16,9 @@ sans_serif = 'Urbanist, sans-serif'
 main_font = sans_serif
 title = 'Scideology'
 app_name = 'Scideology'
-main_data = 'Welcome, to the blog of blogs. For content creators. To create autonomy. With content apps.'
-sample_content = 'This is sample content.'
+main_data = 'Welcome, to the blog of blogs. For content creators. To create autonomy. With content.'
+sample_content = 'Content Subscription App.'
+main_content = f'Welcome, to {app_name} for content creators.'
 page_data = {'main': f'{main_data}'}
 main_page_data = page_data['main']
 head_html = '''<link rel="preconnect" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
@@ -34,16 +35,16 @@ head_html = '''<link rel="preconnect" href="https://cdnjs.cloudflare.com/ajax/li
 body_html = ''''''
 pages = os.getenv("PAGES").split(',')
 page_dict = {page: sample_content for page in pages}
-page_data.update(page_dict)
+# page_data.update(page_dict)
 
 
 async def page_content(pagename: str):
-    global page_data
+    global page_dict
     with ui.row().classes('flex flex-row justify-center'):
-        if pagename in page_data.items() and pagename != 'main':
+        if pagename in page_dict.keys():
             ui.label(f'{pagename}').style(replace=f'font-family: {font_family}; font-size: {font_size}; '
                                                   f'color: {font_color}')
-        await body_content.get(pagename, page_data)
+        # await body_content.get(pagename, page_dict)
 
 
 async def page_body(pagename: str):
@@ -61,7 +62,8 @@ async def page_footer(pagename: str):
                         ui.label(f'{page}').style(replace=f'font-family: {font_family}; font-size: 3.5vw; color: light'
                                                           f'{font_color}')
             if footer_brand is True:
-                ui.label(f'{app_name}').style(replace=f'font-family: {font_family}; font-size: 13.5vw; color: {font_color}')
+                ui.label(f'{app_name}').style(replace=f'font-family: {font_family}; font-size: 13.5vw; '
+                                                      f'color: {font_color}')
 
 
 # Function to generate dynamic content for a page
@@ -72,14 +74,6 @@ async def generate_content(pagename: str):
     await page_footer(pagename)
 
 
-async def page_iter(page_name):
-    if page_name in pages:
-        # Create a page for each item in pages
-        @ui.page(f'/{page_name.lower()}')
-        async def dynamic_page():
-            await generate_content(page_name.lower)
-
-
 @ui.page('/')
 async def main():
     # Styling and fonts
@@ -87,23 +81,29 @@ async def main():
     {head_html}
     ''')
 
-    def menu_list(page_list_item):
-        return ui.menu_item(f'{page_list_item}', lambda: ui.open(f'{page_list_item.lower()}'), auto_close=True)
+    async def dynamic_page(pagename: str):
+        @ui.page(f'/{pagename.lower()}')
+        async def page():
+            print(pagename.lower())
+            await generate_content(pagename.lower())
+
+    async def menu_list(pagename):
+        ui.menu_item(f'{pagename}', lambda: ui.open(f'{pagename.lower()}'), auto_close=True)
 
     ui.query('body').style(replace=f'background-color: {bg_color};')
     ui.image('static/images/Home.svg').style(replace='width: 100%; height: 100%;')
+
     with ui.row().classes('w-full h-full absolute top-0 left-0'):
         with ui.button(icon='menu', color=f'{font_color}').classes(f'{menu_classes}'):
             with ui.menu() as menu:
-                for page in pages:
-                    await page_iter(page)
-                    menu_list(page)
+                for page in page_dict.keys():
+                    await menu_list(page)
                 ui.separator()
                 ui.menu_item('Close', on_click=menu.close)
-
+            for page in page_dict.keys():
+                await dynamic_page(page)
     with ui.row().classes('flex flex-row'):
-        ui.label(f'{main_data}').style(replace=f'font-family: {main_font}; font-size: {main_font_size}; '
-                                               f'color: {font_color}').classes('ml-5')
-        await page_body('main')
+        ui.label(f'{main_page_data}').style(replace=f'font-family: {main_font}; font-size: {main_font_size}; '
+                                                    f'color: {font_color}').classes('ml-5')
 
 ui.run(title=f'{title}', storage_secret='secret_key', dark=False)

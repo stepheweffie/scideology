@@ -12,11 +12,9 @@ async def render(render_list: list):
 
 async def get(page: str, data: dict):
     global pages
-    with ui.row().classes('flex flex-row justify-center'):
-        if page in pages:
-            if len(data) > 1:
-                content = data[f'{page}']
-                await render(content)
+    print(pages)
+    if page in data.keys():
+        print(page)
 
 
 async def post(page: str, data: dict):
