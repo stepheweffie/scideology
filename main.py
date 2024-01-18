@@ -71,7 +71,7 @@ async def page_menu(pagename: str):
         item.classes('text-xl')
 
     with ui.row().classes('w-full h-full no-wrap top-0 left-0'):
-        with ui.button(icon='menu', color='#737373').classes('relative top-0 right-0 m-3 p-3 rounded-full'):
+        with ui.button(icon='menu', color='#737373').classes('absolute top-0 right-0 m-3 p-3 rounded-full'):
             with ui.menu() as menu:
                 for page in pages:
                     if page != pagename:
@@ -110,7 +110,12 @@ async def main():
     for page in pages:
         await page_iter(page)
 
-    with ui.row().classes('flex flex-row'):
+    with ui.row().classes('w-full h-full top-0 left-0 justify-end'):
+        with ui.button(icon='menu', color='#737373').classes('relative top-0 m-3 p-3 rounded-full'):
+            with ui.menu() as menu:
+                menu.classes(f'text-xl')
+                for page in pages:
+                   ui.menu_item(f'{page}', lambda: ui.open(f'{page.lower()}'), auto_close=True)
         ui.query('body').style(replace=f'background-color: {bg_color};')
         ui.image('static/images/Home.svg').style(replace='width: 100%; height: 100%;')
 
