@@ -1,9 +1,6 @@
 from nicegui import ui
-from dotenv import load_dotenv
 import body_content
 import os
-
-load_dotenv()
 bg_color = '#4BF8FD'
 menu_classes = 'fixed top-0 right-0 m-3 p-6 rounded-full'
 footer_classes = f'flex flex-row justify-center bg-gray-100 w-full fixed bottom-0 left-0'
@@ -33,8 +30,11 @@ head_html = '''<link rel="preconnect" href="https://cdnjs.cloudflare.com/ajax/li
         }
     </style>'''
 body_html = ''''''
-pages = os.getenv("PAGES").split(',')
-page_dict = {page: sample_content for page in pages}
+# pages = os.getenv("PAGES").split(',')
+pages = ['About', 'Contact', 'Social']
+page_dict = {page.lower(): sample_content for page in pages}
+print(page_dict)
+print(pages)
 # page_data.update(page_dict)
 
 
@@ -44,7 +44,6 @@ async def page_content(pagename: str):
         if pagename in page_dict.keys():
             ui.label(f'{pagename}').style(replace=f'font-family: {font_family}; font-size: {font_size}; '
                                                   f'color: {font_color}')
-        # await body_content.get(pagename, page_dict)
 
 
 async def page_body(pagename: str):
@@ -66,12 +65,22 @@ async def page_footer(pagename: str):
                                                       f'color: {font_color}')
 
 
-# Function to generate dynamic content for a page
 async def generate_content(pagename: str):
     # call a function to get the content
     await page_content(pagename)
     await page_body(pagename)
     await page_footer(pagename)
+
+
+async def page_iter(page_name):
+    if page_name in pages:
+        # Create a page for each item in pages
+        @ui.page(f'/{page_name.lower()}')
+        async def dynamic_page():
+            print(page_name.lower())
+            await generate_content(page_name)
+    else:
+        return ui.label(f'Page {page_name} not found in menu.')
 
 
 @ui.page('/')
@@ -81,27 +90,22 @@ async def main():
     {head_html}
     ''')
 
-    async def dynamic_page(pagename: str):
-        @ui.page(f'/{pagename.lower()}')
-        async def page():
-            print(pagename.lower())
-            await generate_content(pagename.lower())
+    for page in pages:
+        await page_iter(page)
 
-    async def menu_list(pagename):
-        ui.menu_item(f'{pagename}', lambda: ui.open(f'{pagename.lower()}'), auto_close=True)
+    def menu_list(page_list_item):
+        return ui.menu_item(f'{page_list_item}', lambda: ui.open(f'{page_list_item.lower()}'), auto_close=True)
 
     ui.query('body').style(replace=f'background-color: {bg_color};')
     ui.image('static/images/Home.svg').style(replace='width: 100%; height: 100%;')
-
     with ui.row().classes('w-full h-full absolute top-0 left-0'):
-        with ui.button(icon='menu', color=f'{font_color}').classes(f'{menu_classes}'):
+        with ui.button(icon='menu', color='#737373').classes('absolute top-0 right-0 m-3 p-3 rounded-full'):
             with ui.menu() as menu:
-                for page in page_dict.keys():
-                    await menu_list(page)
+                for page in pages:
+                    menu_list(page)
                 ui.separator()
                 ui.menu_item('Close', on_click=menu.close)
-            for page in page_dict.keys():
-                await dynamic_page(page)
+
     with ui.row().classes('flex flex-row'):
         ui.label(f'{main_page_data}').style(replace=f'font-family: {main_font}; font-size: {main_font_size}; '
                                                     f'color: {font_color}').classes('ml-5')
