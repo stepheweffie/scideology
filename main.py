@@ -1,18 +1,18 @@
 from nicegui import ui
 from dotenv import load_dotenv
-import os
 
 load_dotenv()
-animate_css = os.getenv("ANIMATE_CSS")
 bg_color = '#4BF8FD'
-
+font_color = '#737373'
+title = 'Scideology'
+font_family = 'Prata, serif'
 # List of pages
 pages = ['About', 'Contact', 'Social']
 
 
 async def page_content(pagename: str):
     with ui.row().classes('flex flex-row justify-center'):
-        ui.label(f'{pagename}').style(replace=f'font-family: Prata, serif; font-size: 13.5vw; color: ')
+        ui.label(f'{pagename}').style(replace=f'font-family: {font_family}; font-size: 13.5vw; color: {font_color}')
 
 
 # Function to generate dynamic content for a page
@@ -34,8 +34,8 @@ async def page_iter(page_name):
 @ui.page('/')
 async def main():
     # Styling and fonts
-    # ui.add_head_html(animate_css)
     ui.add_head_html('''
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Prata&display=swap" rel="stylesheet">
@@ -51,7 +51,8 @@ async def main():
         return ui.menu_item(f'{page_list_item}', lambda: ui.open(f'{page_list_item.lower()}'), auto_close=True)
 
     ui.query('body').style(replace=f'background-color: {bg_color};')
-    ui.image('static/images/Home.svg').style(replace='width: 100%; height: 100%;')
+    ui.image('static/images/Home.svg').style(replace='width: 100%; height: 100%;').classes('animate__animated '
+                                                                                           'animate__fadeInDown')
     with ui.row().classes('w-full h-full absolute top-0 left-0'):
         with ui.button(icon='menu', color='#737373').classes('absolute top-0 left-0 m-3 p-3 rounded-full'):
             with ui.menu() as menu:
@@ -62,4 +63,4 @@ async def main():
                 ui.menu_item('Close', on_click=menu.close)
 
 
-ui.run(title='Scideology', storage_secret='secret_key', dark=False)
+ui.run(title=f'{title}', storage_secret='secret_key', dark=False)
