@@ -38,7 +38,6 @@ def menu_list(page_list_item):
 
 
 async def page_menu(pagename: str):
-
     with ui.row().classes('w-full h-full no-wrap top-0 left-0'):
         with ui.button(icon='menu', color='#737373').classes('absolute top-0 right-0 m-3 p-3 rounded-full'):
             with ui.menu() as menu:
