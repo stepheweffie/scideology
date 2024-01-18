@@ -65,8 +65,25 @@ async def page_footer(pagename: str):
                                                       f'color: {font_color}')
 
 
+async def page_menu(pagename: str):
+    def menu_list(page_list_item):
+        item = ui.menu_item(f'{page_list_item}', lambda: ui.open(f'{page_list_item.lower()}'), auto_close=True)
+        item.classes('text-xl')
+
+    with ui.row().classes('w-full h-full no-wrap top-0 left-0'):
+        with ui.button(icon='menu', color='#737373').classes('relative top-0 right-0 m-3 p-3 rounded-full'):
+            with ui.menu() as menu:
+                for page in pages:
+                    if page != pagename:
+                        menu_list(page)
+                ui.separator()
+                home = ui.menu_item('Home', on_click=lambda: ui.open(f'/'))
+                home.classes('text-xl')
+
+
 async def generate_content(pagename: str):
     # call a function to get the content
+    await page_menu(pagename)
     await page_content(pagename)
     await page_body(pagename)
     await page_footer(pagename)
@@ -93,20 +110,10 @@ async def main():
     for page in pages:
         await page_iter(page)
 
-    def menu_list(page_list_item):
-        return ui.menu_item(f'{page_list_item}', lambda: ui.open(f'{page_list_item.lower()}'), auto_close=True)
-
-    ui.query('body').style(replace=f'background-color: {bg_color};')
-    ui.image('static/images/Home.svg').style(replace='width: 100%; height: 100%;')
-    with ui.row().classes('w-full h-full absolute top-0 left-0'):
-        with ui.button(icon='menu', color='#737373').classes('absolute top-0 right-0 m-3 p-3 rounded-full'):
-            with ui.menu() as menu:
-                for page in pages:
-                    menu_list(page)
-                ui.separator()
-                ui.menu_item('Close', on_click=menu.close)
-
     with ui.row().classes('flex flex-row'):
+        ui.query('body').style(replace=f'background-color: {bg_color};')
+        ui.image('static/images/Home.svg').style(replace='width: 100%; height: 100%;')
+
         ui.label(f'{main_page_data}').style(replace=f'font-family: {main_font}; font-size: {main_font_size}; '
                                                     f'color: {font_color}').classes('ml-5')
 
