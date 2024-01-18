@@ -41,7 +41,7 @@ print(pages)
 async def page_content(pagename: str):
     global page_dict
     with ui.row().classes('flex flex-row justify-center'):
-        if pagename in page_dict.keys():
+        if pagename in pages:
             ui.label(f'{pagename}').style(replace=f'font-family: {font_family}; font-size: {font_size}; '
                                                   f'color: {font_color}')
 
