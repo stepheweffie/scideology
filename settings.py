@@ -11,10 +11,10 @@ title = 'Settings'
 body_html = ''''''
 
 
-@ui.page('/')
+@ui.page('/setup')
 async def setup():
     with ui.row().classes('w-full h-full top-0 left-0 wrap justify-end'):
-        ui.label('Settings & Setup Form').classes('text-4xl text-gray-700')
+        ui.label('Settings & Setup').classes('text-4xl text-gray-700')
     with ui.row().classes('w-full h-full wrap justify-center'):
         app_name = ui.input(label='App or Brand Name').classes('text-4xl bg-gray-100')
         app_title = ui.input(label='Title, e.g. can be same as App or Brand Name').classes('text-4xl bg-gray-100')
@@ -29,19 +29,23 @@ async def setup():
                 bottom_detail = ui.input(label='Bottom Detail Text').classes('text-4xl bg-gray-100')
             with ui.row().classes('w-full h-full justify-center'):
                 serif_link = ui.input(label='Serif Font Link').classes('text-4xl bg-gray-100')
-                serif_font = ui.input(label='Sans Serif Name').classes('text-4xl bg-gray-100')
+                serif_font = ui.input(label='Serif Name').classes('text-4xl bg-gray-100')
                 sans_serif_link = ui.input(label='Sans Serif Font Link').classes('text-4xl bg-gray-100')
                 sans_serif = ui.input(label='Sans Serif Name').classes('text-4xl bg-gray-100')
-            with ui.row().classes('w-full h-full no-wrap justify-center'):
+            with ui.row().classes('w-full h-full wrap justify-center'):
                 header_image = ui.upload(label='Upload Transparent (or not) Home Background Header').classes(
                     'text-4xl bg-gray-100')
-
+            with ui.row().classes('w-full h-full wrap justify-center'):
+                head_links = ui.input(label='Head HTML Links').classes('text-4xl bg-gray-100')
             with ui.row().classes('w-full h-full wrap justify-center'):
                 with ui.column():
                     home_bg = ui.color_input(label='Home Page Background Color').classes('text-4xl bg-gray-100')
                     serif_color = ui.color_input(label='Serif Font Color').classes('text-4xl bg-gray-100')
                     sans_serif_color = ui.color_input(label='Sans Serif Font Color').classes('text-4xl bg-gray-100')
+                    footer_bg = ui.color_input(label='Footer Background Color').classes('text-4xl bg-gray-100')
+                    menu_bg = ui.color_input(label='Menu Background Color').classes('text-4xl bg-gray-100')
                 with ui.column():
+                    logo_upload = ui.upload(label='Upload Logo').classes('text-4xl bg-gray-100')
                     image_upload = ui.upload(label='Upload Images').classes('text-4xl bg-gray-100')
                     video_upload = ui.upload(label='Upload Videos').classes('text-4xl bg-gray-100')
                 with ui.column():
@@ -72,6 +76,21 @@ async def setup():
     page_dict = {page.lower(): top_detail for page in pages}
     # <link href="https://fonts.googleapis.com/css2?family=Prata&display=swap" rel="stylesheet">
     # <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@500&display=swap" rel="stylesheet">
+    head_links = f''' '''
+    google_fonts = f''' 
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            {serif_link}
+            {sans_serif_link}
+            '''
+
+    head_html = google_fonts + '''
+            <style>
+                :root {
+                    --nicegui-default-padding: 0rem;
+                    --nicegui-default-gap: 0rem;
+                }
+            </style>'''
     df = pd.DataFrame(data={
         'App Name': [app_name],
         'App Title': [app_title],
@@ -86,24 +105,11 @@ async def setup():
         'Page One': [one.value],
         'Page Two': [two.value],
         'Page Three': [three.value],
+        'Main Page Data': [main_page_data],
+        'Head HTML': [head_html],
     })
     df.to_csv('settings.csv')
     df.to_json('settings.json')
-
-    google_fonts = f''' 
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        {serif_link}
-        {sans_serif_link}
-        '''
-
-    head_html = google_fonts + '''
-        <style>
-            :root {
-                --nicegui-default-padding: 0rem;
-                --nicegui-default-gap: 0rem;
-            }
-        </style>'''
-
+    return df
 
 ui.run(title=f'{title}', storage_secret='secret_key', dark=False)
