@@ -1,11 +1,11 @@
 from nicegui import ui
 import pandas as pd
-
 menu_classes = f'fixed top-0 right-0 m-3 p-6 rounded-full'
 footer_classes = f'flex flex-row justify-center bg-gray-100 w-full fixed bottom-0 left-0'
 footer_brand = True
-font_color = '#737373'
-font_size = '13.5vw'
+serif_font_color = '#737373'
+# sans_serif_color = '#737373'
+serif_font_size = '13.5vw'
 main_font_size = '6.5vw'
 title = 'Settings'
 body_html = ''''''
@@ -39,36 +39,42 @@ async def setup():
                 head_links = ui.input(label='Head HTML Links').classes('text-4xl bg-gray-100')
             with ui.row().classes('w-full h-full wrap justify-center'):
                 with ui.column():
-                    home_bg = ui.color_input(label='Home Page Background Color').classes('text-4xl bg-gray-100')
+                    bg_color = ui.color_input(label='Home Page Background Color').classes('text-4xl bg-gray-100')
                     serif_color = ui.color_input(label='Serif Font Color').classes('text-4xl bg-gray-100')
                     sans_serif_color = ui.color_input(label='Sans Serif Font Color').classes('text-4xl bg-gray-100')
-                    footer_bg = ui.color_input(label='Footer Background Color').classes('text-4xl bg-gray-100')
-                    menu_bg = ui.color_input(label='Menu Background Color').classes('text-4xl bg-gray-100')
-                with ui.column():
-                    logo_upload = ui.upload(label='Upload Logo').classes('text-4xl bg-gray-100')
-                    image_upload = ui.upload(label='Upload Images').classes('text-4xl bg-gray-100')
-                    video_upload = ui.upload(label='Upload Videos').classes('text-4xl bg-gray-100')
-                with ui.column():
-                    html_upload = ui.upload(label='Upload HTML Files').classes('text-4xl bg-gray-100')
-                    css_upload = ui.upload(label='Upload CSS Files').classes('text-4xl bg-gray-100')
-                    js_upload = ui.upload(label='Upload JS Files').classes('text-4xl bg-gray-100')
+                    footer_bg_color = ui.color_input(label='Footer Background Color').classes('text-4xl bg-gray-100')
+                    menu_bg_color = ui.color_input(label='Menu Background Color').classes('text-4xl bg-gray-100')
+            with ui.column():
+                logo_upload = ui.upload(label='Upload Logo').classes('text-4xl bg-gray-100')
+                image_upload = ui.upload(label='Upload Images').classes('text-4xl bg-gray-100')
+                video_upload = ui.upload(label='Upload Videos').classes('text-4xl bg-gray-100')
+            with ui.column():
+                html_upload = ui.upload(label='Upload HTML Files').classes('text-4xl bg-gray-100')
+                css_upload = ui.upload(label='Upload CSS Files').classes('text-4xl bg-gray-100')
+                js_upload = ui.upload(label='Upload JS Files').classes('text-4xl bg-gray-100')
 
     app_name = app_name.value
     # 'Scideology'
     app_title = app_title.value
     serif_font = serif_font.value
+    serif_font_family = "Prata, serif"
     # 'Prata, serif'
     serif_link = serif_link.value
     sans_serif = sans_serif.value
     sans_serif_link = sans_serif_link.value
+    serif_color = serif_color.value
+    sans_serif_color = sans_serif_color.value
+
+    footer_bg_color = footer_bg_color.value
+    menu_bg_color = menu_bg_color.value
+
     # 'Urbanist, sans-serif'
-    main_font = sans_serif
     main_detail = main_detail.value
     # 'Welcome, to the blog of blogs. For content creators. To create autonomy. With content.'
     top_detail = top_detail.value
     # 'Customize A Content Subscription App Deployed For You.'
     bottom_detail = bottom_detail.value
-    home_bg = home_bg.value
+    bg_color = bg_color.value
     # '#4BF8FD'
     page_data = {'main': f'{main_detail}'}
     main_page_data = page_data['main']
@@ -83,7 +89,8 @@ async def setup():
             {serif_link}
             {sans_serif_link}
             '''
-
+    serif_font_family = ''
+    sans_font_family = ''
     head_html = google_fonts + '''
             <style>
                 :root {
@@ -91,25 +98,43 @@ async def setup():
                     --nicegui-default-gap: 0rem;
                 }
             </style>'''
-    df = pd.DataFrame(data={
-        'App Name': [app_name],
-        'App Title': [app_title],
-        'Serif Font': [serif_font],
-        'Serif Link': [serif_link],
-        'Sans Serif': [sans_serif],
-        'Sans Serif Link': [sans_serif_link],
-        'Main Detail': [main_detail],
-        'Top Detail': [top_detail],
-        'Bottom Detail': [bottom_detail],
-        'Home Background': [home_bg],
-        'Page One': [one.value],
-        'Page Two': [two.value],
-        'Page Three': [three.value],
-        'Main Page Data': [main_page_data],
-        'Head HTML': [head_html],
-    })
-    df.to_csv('settings.csv')
-    df.to_json('settings.json')
-    return df
+
+    async def submit():
+        df = pd.DataFrame(data={
+            'App Name': [app_name],
+            'App Title': [app_title],
+            'Serif Font': [serif_font],
+            'Serif Link': [serif_link],
+            'Serif Color': [serif_color],
+            'Sans Serif': [sans_serif],
+            'Sans Serif Link': [sans_serif_link],
+            'Serif Font Family': [serif_font_family],
+            'Sans Serif Font Family': [sans_font_family],
+            'Font Size': [main_font_size],
+            'Sans Serif Color': [sans_serif_color],
+            'Menu Background Color': [menu_bg_color],
+            'Footer Background Color': [footer_bg_color],
+            'Background Color': [bg_color],
+            'Body HTML': [body_html],
+            'Footer Classes': [footer_classes],
+            'Footer Brand': [footer_brand],
+            'Head Links': [head_links],
+            'Main Detail': [main_detail],
+            'Top Detail': [top_detail],
+            'Bottom Detail': [bottom_detail],
+            'Page One': [one.value],
+            'Page Two': [two.value],
+            'Page Three': [three.value],
+            'Main Page Data': [main_page_data],
+            'Head HTML': [head_html],
+            'Google Fonts': [google_fonts],
+        })
+        df.to_csv('settings.csv')
+        df.to_json('settings.json', orient='index', indent=2)
+        return df
+
+    with ui.row().classes('w-full h-full wrap justify-center'):
+        ui.button('Submit', on_click=submit).classes('text-4xl')
+
 
 ui.run(title=f'{title}', storage_secret='secret_key', dark=False)

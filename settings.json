@@ -1,0 +1,31 @@
+{
+  "0":{
+    "App Name":"",
+    "App Title":"",
+    "Serif Font":"",
+    "Serif Link":"",
+    "Serif Color":"",
+    "Sans Serif":"",
+    "Sans Serif Link":"",
+    "Serif Font Family":"",
+    "Sans Serif Font Family":"",
+    "Font Size":"6.5vw",
+    "Sans Serif Color":"",
+    "Menu Background Color":"",
+    "Footer Background Color":"",
+    "Background Color":"",
+    "Body HTML":"",
+    "Footer Classes":"flex flex-row justify-center bg-gray-100 w-full fixed bottom-0 left-0",
+    "Footer Brand":true,
+    "Head Links":" ",
+    "Main Detail":"",
+    "Top Detail":"",
+    "Bottom Detail":"",
+    "Page One":"About",
+    "Page Two":"Contact",
+    "Page Three":"Social",
+    "Main Page Data":"",
+    "Head HTML":" \n            <link rel=\"preconnect\" href=\"https:\/\/fonts.googleapis.com\">\n            <link rel=\"preconnect\" href=\"https:\/\/fonts.gstatic.com\" crossorigin>\n            \n            \n            \n            <style>\n                :root {\n                    --nicegui-default-padding: 0rem;\n                    --nicegui-default-gap: 0rem;\n                }\n            <\/style>",
+    "Google Fonts":" \n            <link rel=\"preconnect\" href=\"https:\/\/fonts.googleapis.com\">\n            <link rel=\"preconnect\" href=\"https:\/\/fonts.gstatic.com\" crossorigin>\n            \n            \n            "
+  }
+}
