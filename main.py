@@ -1,33 +1,35 @@
 from nicegui import ui
-# Every .py file is on a microservice
 import pandas as pd
 from settings import main_font_size
+import settings
 
 df = pd.read_json('settings.json')
-sans_serif = df['Sans Serif'][0]
-sans_serif_link = df['Sans Serif Link'][0]
+print(df.head())
+setup = df[0]['Setup']
+sans_serif = df[0]['Sans Serif']
+sans_serif_link = df[0]['Sans Serif Link']
 main_font = sans_serif
-main_page_data = df['Main Page Data'][0]
-head_html = df['Head HTML'][0]
-pages = [df['Page One'][0], df['Page Two'][0], df['Page Three'][0]]
-page_dict = {page.lower(): df['Top Detail'][0] for page in pages}
-app_name = df['App Name'][0]
-app_title = df['App Title'][0]
-serif_font = df['Serif Font'][0]
-serif_font_family = df['Serif Font Family'][0]
-serif_link = df['Serif Link'][0]
-main_detail = df['Main Detail'][0]
-top_detail = df['Top Detail'][0]
-bottom_detail = df['Bottom Detail'][0]
-bg_color = df['Background Color'][0]
-head_links = df['Head Links'][0]
-google_fonts = df['Google Fonts'][0]
-font_size = df['Font Size'][0]
-sans_serif_color = df['Sans SerifColor'][0]
-serif_color = df['Serif Color'][0]
-footer_classes = df['Footer Classes'][0]
-footer_brand = df['Footer Brand'][0]
-body_html = df['Body HTML'][0]
+main_page_data = df[0]['Main Page Data']
+head_html = df[0]['Head HTML']
+pages = [df[0]['Page One'], df[0]['Page Two'], df[0]['Page Three']]
+page_dict = {page.lower(): df[0]['Top Detail'] for page in pages}
+app_name = df[0]['App Name']
+app_title = df[0]['App Title']
+serif_font = df[0]['Serif Font']
+serif_font_family = df[0]['Serif Font Family']
+serif_link = df[0]['Serif Link']
+main_detail = df[0]['Main Detail']
+top_detail = df[0]['Top Detail']
+bottom_detail = df[0]['Bottom Detail']
+bg_color = df[0]['Background Color']
+head_links = df[0]['Head Links']
+google_fonts = df[0]['Google Fonts']
+font_size = df[0]['Font Size']
+sans_serif_color = df[0]['Sans Serif Color']
+serif_color = df[0]['Serif Color']
+footer_classes = df[0]['Footer Classes']
+footer_brand = df[0]['Footer Brand']
+body_html = df[0]['Body HTML']
 
 
 async def page_content(pagename: str):
@@ -95,6 +97,7 @@ async def page_iter(page_name):
 
 @ui.page('/')
 async def main():
+
     # Styling and fonts
     ui.add_head_html(f'''
     {head_html}
@@ -113,5 +116,11 @@ async def main():
         ui.image('static/images/Home.svg').style(replace='width: 100%; height: 100%;')
         ui.label(f'{main_page_data}').style(replace=f'font-family: {main_font}; font-size: {main_font_size}; '
                                                     f'color: {sans_serif_color}').classes('ml-5')
+
+
+@ui.page('/setup')
+async def settings_setup():
+    await settings.setup()
+
 
 ui.run(title=f'Scideology', storage_secret='secret_key', dark=False)

@@ -1,5 +1,5 @@
-,App Name,App Title,Serif Font,Serif Link,Serif Color,Sans Serif,Sans Serif Link,Serif Font Family,Sans Serif Font Family,Font Size,Sans Serif Color,Menu Background Color,Footer Background Color,Background Color,Body HTML,Footer Classes,Footer Brand,Head Links,Main Detail,Top Detail,Bottom Detail,Page One,Page Two,Page Three,Main Page Data,Head HTML,Google Fonts
-0,,,,,,,,,,6.5vw,,,,,,flex flex-row justify-center bg-gray-100 w-full fixed bottom-0 left-0,True, ,,,,About,Contact,Social,," 
+,Setup,App Name,App Title,Serif Font,Serif Link,Serif Color,Sans Serif,Sans Serif Link,Serif Font Family,Sans Serif Font Family,Font Size,Sans Serif Color,Menu Background Color,Footer Background Color,Background Color,Body HTML,Footer Classes,Footer Brand,Head Links,Main Detail,Top Detail,Bottom Detail,Page One,Page Two,Page Three,Main Page Data,Head HTML,Google Fonts
+0,True,,,,,,,,,,6.5vw,,,,,,flex flex-row justify-center bg-gray-100 w-full fixed bottom-0 left-0,True, ,,,,,,,," 
             <link rel=""preconnect"" href=""https://fonts.googleapis.com"">
             <link rel=""preconnect"" href=""https://fonts.gstatic.com"" crossorigin>
             

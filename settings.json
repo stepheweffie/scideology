@@ -1,5 +1,6 @@
 {
   "0":{
+    "Setup":false,
     "App Name":"",
     "App Title":"",
     "Serif Font":"",
@@ -21,9 +22,9 @@
     "Main Detail":"",
     "Top Detail":"",
     "Bottom Detail":"",
-    "Page One":"About",
-    "Page Two":"Contact",
-    "Page Three":"Social",
+    "Page One":"",
+    "Page Two":"",
+    "Page Three":"",
     "Main Page Data":"",
     "Head HTML":" \n            <link rel=\"preconnect\" href=\"https:\/\/fonts.googleapis.com\">\n            <link rel=\"preconnect\" href=\"https:\/\/fonts.gstatic.com\" crossorigin>\n            \n            \n            \n            <style>\n                :root {\n                    --nicegui-default-padding: 0rem;\n                    --nicegui-default-gap: 0rem;\n                }\n            <\/style>",
     "Google Fonts":" \n            <link rel=\"preconnect\" href=\"https:\/\/fonts.googleapis.com\">\n            <link rel=\"preconnect\" href=\"https:\/\/fonts.gstatic.com\" crossorigin>\n            \n            \n            "

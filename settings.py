@@ -1,5 +1,6 @@
 from nicegui import ui
 import pandas as pd
+
 menu_classes = f'fixed top-0 right-0 m-3 p-6 rounded-full'
 footer_classes = f'flex flex-row justify-center bg-gray-100 w-full fixed bottom-0 left-0'
 footer_brand = True
@@ -11,7 +12,6 @@ title = 'Settings'
 body_html = ''''''
 
 
-@ui.page('/setup')
 async def setup():
     with ui.row().classes('w-full h-full top-0 left-0 wrap justify-end'):
         ui.label('Settings & Setup').classes('text-4xl text-gray-700')
@@ -48,10 +48,6 @@ async def setup():
                 logo_upload = ui.upload(label='Upload Logo').classes('text-4xl bg-gray-100')
                 image_upload = ui.upload(label='Upload Images').classes('text-4xl bg-gray-100')
                 video_upload = ui.upload(label='Upload Videos').classes('text-4xl bg-gray-100')
-            with ui.column():
-                html_upload = ui.upload(label='Upload HTML Files').classes('text-4xl bg-gray-100')
-                css_upload = ui.upload(label='Upload CSS Files').classes('text-4xl bg-gray-100')
-                js_upload = ui.upload(label='Upload JS Files').classes('text-4xl bg-gray-100')
 
     app_name = app_name.value
     # 'Scideology'
@@ -99,8 +95,9 @@ async def setup():
                 }
             </style>'''
 
-    async def submit():
+    def submit():
         df = pd.DataFrame(data={
+            'Setup': True,
             'App Name': [app_name],
             'App Title': [app_title],
             'Serif Font': [serif_font],
@@ -131,10 +128,19 @@ async def setup():
         })
         df.to_csv('settings.csv')
         df.to_json('settings.json', orient='index', indent=2)
+        ui.open('/setup/assets')
         return df
 
     with ui.row().classes('w-full h-full wrap justify-center'):
         ui.button('Submit', on_click=submit).classes('text-4xl')
+
+
+@ui.page('/setup/assets')
+async def route():
+    with ui.column():
+        html_upload = ui.upload(label='Upload HTML Files').classes('text-4xl')
+        css_upload = ui.upload(label='Upload CSS Files').classes('text-4xl')
+        js_upload = ui.upload(label='Upload JS Files').classes('text-4xl')
 
 
 ui.run(title=f'{title}', storage_secret='secret_key', dark=False)
