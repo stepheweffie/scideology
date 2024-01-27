@@ -1,6 +1,7 @@
 {
   "0":{
     "Setup":false,
+    "Trailer":false,
     "App Name":"",
     "App Title":"",
     "Serif Font":"",
@@ -8,8 +9,6 @@
     "Serif Color":"",
     "Sans Serif":"",
     "Sans Serif Link":"",
-    "Serif Font Family":"",
-    "Sans Serif Font Family":"",
     "Font Size":"6.5vw",
     "Sans Serif Color":"",
     "Menu Background Color":"",
@@ -25,8 +24,8 @@
     "Page One":"",
     "Page Two":"",
     "Page Three":"",
-    "Main Page Data":"",
-    "Head HTML":" \n            <link rel=\"preconnect\" href=\"https:\/\/fonts.googleapis.com\">\n            <link rel=\"preconnect\" href=\"https:\/\/fonts.gstatic.com\" crossorigin>\n            \n            \n            \n            <style>\n                :root {\n                    --nicegui-default-padding: 0rem;\n                    --nicegui-default-gap: 0rem;\n                }\n            <\/style>",
-    "Google Fonts":" \n            <link rel=\"preconnect\" href=\"https:\/\/fonts.googleapis.com\">\n            <link rel=\"preconnect\" href=\"https:\/\/fonts.gstatic.com\" crossorigin>\n            \n            \n            "
+    "Main Page Data":"<nicegui.elements.input.Input object at 0x11cf21760>",
+    "Head HTML":" \n            <link rel=\"preconnect\" href=\"https:\/\/fonts.googleapis.com\">\n            <link rel=\"preconnect\" href=\"https:\/\/fonts.gstatic.com\" crossorigin>\n            <nicegui.elements.input.Input object at 0x11cf80da0>\n            <nicegui.elements.input.Input object at 0x11cf80f50>\n            \n            <style>\n                :root {\n                    --nicegui-default-padding: 0rem;\n                    --nicegui-default-gap: 0rem;\n                }\n            <\/style>",
+    "Google Fonts":" \n            <link rel=\"preconnect\" href=\"https:\/\/fonts.googleapis.com\">\n            <link rel=\"preconnect\" href=\"https:\/\/fonts.gstatic.com\" crossorigin>\n            <nicegui.elements.input.Input object at 0x11cf80da0>\n            <nicegui.elements.input.Input object at 0x11cf80f50>\n            "
   }
 }
