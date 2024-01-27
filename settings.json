@@ -1,9 +1,9 @@
 {
   "0":{
-    "Setup":false,
+    "Setup":true,
     "Trailer":false,
-    "App Name":"",
-    "App Title":"",
+    "App Name":"Scideology",
+    "App Title":"Scideology",
     "Serif Font":"",
     "Serif Link":"",
     "Serif Color":"",
@@ -21,11 +21,11 @@
     "Main Detail":"",
     "Top Detail":"",
     "Bottom Detail":"",
-    "Page One":"",
-    "Page Two":"",
-    "Page Three":"",
-    "Main Page Data":"<nicegui.elements.input.Input object at 0x11cf21760>",
-    "Head HTML":" \n            <link rel=\"preconnect\" href=\"https:\/\/fonts.googleapis.com\">\n            <link rel=\"preconnect\" href=\"https:\/\/fonts.gstatic.com\" crossorigin>\n            <nicegui.elements.input.Input object at 0x11cf80da0>\n            <nicegui.elements.input.Input object at 0x11cf80f50>\n            \n            <style>\n                :root {\n                    --nicegui-default-padding: 0rem;\n                    --nicegui-default-gap: 0rem;\n                }\n            <\/style>",
-    "Google Fonts":" \n            <link rel=\"preconnect\" href=\"https:\/\/fonts.googleapis.com\">\n            <link rel=\"preconnect\" href=\"https:\/\/fonts.gstatic.com\" crossorigin>\n            <nicegui.elements.input.Input object at 0x11cf80da0>\n            <nicegui.elements.input.Input object at 0x11cf80f50>\n            "
+    "Page One":"About",
+    "Page Two":"Contact",
+    "Page Three":"Social",
+    "Main Page Data":"<nicegui.elements.input.Input object at 0x11c4176e0>",
+    "Head HTML":" \n            <link rel=\"preconnect\" href=\"https:\/\/fonts.googleapis.com\">\n            <link rel=\"preconnect\" href=\"https:\/\/fonts.gstatic.com\" crossorigin>\n            <nicegui.elements.input.Input object at 0x11c417b90>\n            <nicegui.elements.input.Input object at 0x11c35de20>\n            \n            <style>\n                :root {\n                    --nicegui-default-padding: 0rem;\n                    --nicegui-default-gap: 0rem;\n                }\n            <\/style>",
+    "Google Fonts":" \n            <link rel=\"preconnect\" href=\"https:\/\/fonts.googleapis.com\">\n            <link rel=\"preconnect\" href=\"https:\/\/fonts.gstatic.com\" crossorigin>\n            <nicegui.elements.input.Input object at 0x11c417b90>\n            <nicegui.elements.input.Input object at 0x11c35de20>\n            "
   }
 }

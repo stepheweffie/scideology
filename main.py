@@ -130,6 +130,10 @@ async def page_iter(page_name):
 
 @ui.page('/')
 async def main():
+    # Check for serve STATIC_SITE
+    serve_static_site = os.getenv('STATIC_SITE')
+    if serve_static_site is True:
+        pass
 
     # Styling and fonts
     ui.add_head_html(f'''
@@ -147,13 +151,13 @@ async def main():
                     menu_list(page)
 
         ui.query('body').style(replace=f'background-color: {bg_color};')
-        ui.image('static/images/Home.svg').style(replace='width: 100%; height: 100%;')
+        ui.image(f'static/images/Home.svg').style(replace='width: 100%; height: 100%;')
         ui.label(f'{main_page_data}').style(replace=f'font-family: {main_font}; font-size: {main_font_size}; '
                                                     f'color: {sans_serif_color}').classes('ml-5')
         if setup is False:
             with ui.row():
                 ui.video('/media/instructions.mp4')
-        if setup is True:
+        if trailer is True:
             with ui.row():
                 ui.video('/media/trailer.mp4')
 

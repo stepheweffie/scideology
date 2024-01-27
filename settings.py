@@ -41,13 +41,15 @@ async def setup():
 
                 def handle_upload(e: events.UploadEventArguments):
                     uploaded_file = e
-                    name, ext = os.path.splitext(uploaded_file.filename)
+                    name, ext = os.path.splitext(uploaded_file.name)
                     if ext in ['.png', '.jpg', '.jpeg', '.svg']:
                         # Define the path where you want to save the file
-                        save_path = '/static/images/Home' + f'{ext}'
+                        save_path = '/static/images'
+                        save_file = os.path.join(save_path, f'Home{ext}')
+
                         # Save the file to the specified path
-                        with open(save_path, 'wb') as file:
-                            file.write(uploaded_file.read())
+                        with open(save_file, 'wb') as file:
+                            file.write(uploaded_file.data)
                     else:
                         ui.notify('Please select a valid image file')
 
@@ -77,12 +79,13 @@ async def setup():
     # 'Welcome, to the blog of blogs. For content creators. To create autonomy. With content.'
     # 'Customize A Content Subscription App Deployed For You.'
     # '#4BF8FD'
+
     page_data = {'main': f'{main_detail}'}
     main_page_data = page_data['main']
-    pages = [one.value, two.value, three.value]
-    page_dict = {page.lower(): top_detail for page in pages}
+
     # <link href="https://fonts.googleapis.com/css2?family=Prata&display=swap" rel="stylesheet">
     # <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@500&display=swap" rel="stylesheet">
+
     head_links = f''' '''
     google_fonts = f''' 
             <link rel="preconnect" href="https://fonts.googleapis.com">
