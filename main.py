@@ -130,10 +130,11 @@ async def page_iter(page_name):
 
 @ui.page('/')
 async def main():
+    # Enable Security Lock by default before setup
     # Check for serve STATIC_SITE
     serve_static_site = os.getenv('STATIC_SITE')
     if serve_static_site is True:
-        pass
+        ui.open('/setup/assets')
 
     # Styling and fonts
     ui.add_head_html(f'''
@@ -142,7 +143,7 @@ async def main():
 
     for page in pages:
         await page_iter(page)
-
+    header_image = os.listdir('static/images')[0]
     with ui.row().classes('w-full h-full top-0 left-0 justify-end'):
         with ui.button(icon='menu', color=f'{serif_color}').classes('relative top-0 m-3 p-3 rounded-full'):
             with ui.menu() as menu:
@@ -151,7 +152,7 @@ async def main():
                     menu_list(page)
 
         ui.query('body').style(replace=f'background-color: {bg_color};')
-        ui.image(f'static/images/Home.svg').style(replace='width: 100%; height: 100%;')
+        ui.image(f'static/images/{header_image}').style(replace='width: 100%; height: 100%;')
         ui.label(f'{main_page_data}').style(replace=f'font-family: {main_font}; font-size: {main_font_size}; '
                                                     f'color: {sans_serif_color}').classes('ml-5')
         if setup is False:
@@ -162,13 +163,11 @@ async def main():
                 ui.video('/media/trailer.mp4')
 
 
-@ui.page('/setup')
-async def settings_setup():
-    await settings.setup()
-
-
 @ui.page('/affiliate')
 async def affiliate_page():
     await affiliate.affiliate()
+
+
+settings.create_setup()
 
 ui.run(title=f'{app_title}', storage_secret=f'{secret_key}', dark=False)
