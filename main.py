@@ -1,6 +1,5 @@
 from nicegui import ui, app
 import pandas as pd
-from settings import main_font_size
 import settings
 from dotenv import load_dotenv
 import os
@@ -143,7 +142,9 @@ async def main():
 
     for page in pages:
         await page_iter(page)
+
     header_image = os.listdir('static/images')[0]
+
     with ui.row().classes('w-full h-full top-0 left-0 justify-end'):
         with ui.button(icon='menu', color=f'{serif_color}').classes('relative top-0 m-3 p-3 rounded-full'):
             with ui.menu() as menu:
@@ -153,8 +154,8 @@ async def main():
 
         ui.query('body').style(replace=f'background-color: {bg_color};')
         ui.image(f'static/images/{header_image}').style(replace='width: 100%; height: 100%;')
-        ui.label(f'{main_page_data}').style(replace=f'font-family: {main_font}; font-size: {main_font_size}; '
-                                                    f'color: {sans_serif_color}').classes('ml-5')
+        # ui.label(f'{main_page_data}').style(replace=f'font-family: {main_font}; font-size: {main_font_size}; '
+        #                                            f'color: {sans_serif_color}').classes('ml-5')
         if setup is False:
             with ui.row():
                 ui.video('/media/instructions.mp4')
@@ -162,12 +163,12 @@ async def main():
             with ui.row():
                 ui.video('/media/trailer.mp4')
 
+        await settings.create_setup()
+
 
 @ui.page('/affiliate')
 async def affiliate_page():
     await affiliate.affiliate()
 
-
-settings.create_setup()
 
 ui.run(title=f'{app_title}', storage_secret=f'{secret_key}', dark=False)

@@ -1,18 +1,18 @@
 ,Setup,Trailer,App Name,App Title,Serif Font,Serif Link,Serif Color,Sans Serif,Sans Serif Link,Font Size,Sans Serif Color,Menu Background Color,Footer Background Color,Background Color,Body HTML,Footer Classes,Footer Brand,Head Links,Main Detail,Top Detail,Bottom Detail,Page One,Page Two,Page Three,Main Page Data,Head HTML,Google Fonts
-0,True,False,Scideology,Scideology,,,,,,6.5vw,,,,#97f0c9,,flex flex-row justify-center bg-gray-100 w-full fixed bottom-0 left-0,True, ,,,,About,Contact,Social,<nicegui.elements.input.Input object at 0x116d1ed20>," 
-            <link rel=""preconnect"" href=""https://fonts.googleapis.com"">
-            <link rel=""preconnect"" href=""https://fonts.gstatic.com"" crossorigin>
-            <nicegui.elements.input.Input object at 0x1168ddf10>
-            <nicegui.elements.input.Input object at 0x1168df350>
-            
-            <style>
-                :root {
-                    --nicegui-default-padding: 0rem;
-                    --nicegui-default-gap: 0rem;
-                }
-            </style>"," 
-            <link rel=""preconnect"" href=""https://fonts.googleapis.com"">
-            <link rel=""preconnect"" href=""https://fonts.gstatic.com"" crossorigin>
-            <nicegui.elements.input.Input object at 0x1168ddf10>
-            <nicegui.elements.input.Input object at 0x1168df350>
-            "
+0,True,False,Some App,,,,,,,6.5vw,,,,,,flex flex-row justify-center bg-gray-100 w-full fixed bottom-0 left-0,True, ,,,,Into ,The,Void,<nicegui.elements.input.Input object at 0x120e2fcb0>," 
+                <link rel=""preconnect"" href=""https://fonts.googleapis.com"">
+                <link rel=""preconnect"" href=""https://fonts.gstatic.com"" crossorigin>
+                <nicegui.elements.input.Input object at 0x120bee4b0>
+                <nicegui.elements.input.Input object at 0x120befbc0>
+                
+                <style>
+                    :root {
+                        --nicegui-default-padding: 0rem;
+                        --nicegui-default-gap: 0rem;
+                    }
+                </style>"," 
+                <link rel=""preconnect"" href=""https://fonts.googleapis.com"">
+                <link rel=""preconnect"" href=""https://fonts.gstatic.com"" crossorigin>
+                <nicegui.elements.input.Input object at 0x120bee4b0>
+                <nicegui.elements.input.Input object at 0x120befbc0>
+                "

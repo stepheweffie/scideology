@@ -13,7 +13,7 @@ title = 'Settings'
 body_html = ''''''
 
 
-def create_setup() -> None:
+async def create_setup() -> None:
     @ui.page('/setup')
     async def setup():
         with ui.row().classes('w-full h-full top-0 left-0 wrap justify-end'):
@@ -132,12 +132,17 @@ def create_setup() -> None:
                 'Head HTML': [head_html],
                 'Google Fonts': [google_fonts],
             })
+
             # Don't erase data from files unless reset is clicked
             df.to_csv('settings.csv')
-            # Empty JSON, Empty Site
-            # df.to_json('settings.json', orient='index', indent=2)
-            ui.open('/')
-            return df
+            # Drop defaults and check for any values
+            if df.drop(['Setup', 'Trailer'], axis=1).notna().any().any():
+                # Drop any rows value NaN
+                df_cleaned = df.dropna(how='all')
+                # Save changed data without overwriting with blank data
+                df_cleaned.to_json('settings.json', orient='index', indent=2)
+                ui.open('/')
+                return df
 
         with ui.row().classes('w-full h-full wrap justify-center'):
             ui.button('Submit', on_click=submit).classes('text-4xl')
