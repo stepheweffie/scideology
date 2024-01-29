@@ -1,10 +1,13 @@
 from nicegui import ui
-
-password = 'secret'
+from models import User
+from dotenv import load_dotenv
+import os
+load_dotenv()
+PASSWORD = os.getenv("PASSWORD")
 
 
 def password_check(modals: list, passw: str):
-    if passw == password:
+    if User.check_password(passw):
         modals[0].style(replace='display: none;')
         modals[1].style(replace='display: none;')
     else:

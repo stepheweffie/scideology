@@ -2,6 +2,7 @@ from nicegui import ui, app
 import pandas as pd
 import settings
 from dotenv import load_dotenv
+
 import os
 from pathlib import Path
 import affiliate
@@ -23,6 +24,9 @@ fonts.mkdir(exist_ok=True)
 images = Path('static/images')
 images.mkdir(exist_ok=True)
 
+videos = Path('static/videos')
+images.mkdir(exist_ok=True)
+
 media = Path('media')
 media.mkdir(exist_ok=True)
 app.add_media_files('/media', media)
@@ -35,6 +39,7 @@ r = requests.get(f'{instructions_url}')
 (media / 'instructions.mp4').write_bytes(r.content)
 
 secret_key = os.getenv('SECRET_KEY')
+
 df = pd.read_json('settings.json')
 
 setup = df[0]['Setup']
@@ -135,6 +140,10 @@ async def main():
     if serve_static_site is True:
         ui.open('/setup/assets')
 
+    await settings.create_setup()
+    if setup is False:
+        ui.open('/setup')
+
     # Styling and fonts
     ui.add_head_html(f'''
     {head_html}
@@ -162,8 +171,6 @@ async def main():
         if trailer is True:
             with ui.row():
                 ui.video('/media/trailer.mp4')
-
-        await settings.create_setup()
 
 
 @ui.page('/affiliate')

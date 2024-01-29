@@ -1,9 +1,9 @@
 ,Setup,Trailer,App Name,App Title,Serif Font,Serif Link,Serif Color,Sans Serif,Sans Serif Link,Font Size,Sans Serif Color,Menu Background Color,Footer Background Color,Background Color,Body HTML,Footer Classes,Footer Brand,Head Links,Main Detail,Top Detail,Bottom Detail,Page One,Page Two,Page Three,Main Page Data,Head HTML,Google Fonts
-0,True,False,Some App,,,,,,,6.5vw,,,,,,flex flex-row justify-center bg-gray-100 w-full fixed bottom-0 left-0,True, ,,,,Into ,The,Void,<nicegui.elements.input.Input object at 0x120e2fcb0>," 
+0,True,False,Scideology,Scideology,"Prata, serif","<link href=""https://fonts.googleapis.com/css2?family=Prata&display=swap"" rel=""stylesheet"">",,"Urbanist, sans-serif","<link href=""https://fonts.googleapis.com/css2?family=Urbanist:wght@500&display=swap"" rel=""stylesheet"">",6.5vw,,,#f5cbcb,,,flex flex-row justify-center bg-gray-100 w-full fixed bottom-0 left-0,True, ,"Welcome, to the blog of blogs. For content creators. To create autonomy. With content.",Customize A Content Subscription App Deployed For You.,Powered By Open Source Software,About,Contact,Social,<nicegui.elements.input.Input object at 0x11a8cb2c0>," 
                 <link rel=""preconnect"" href=""https://fonts.googleapis.com"">
                 <link rel=""preconnect"" href=""https://fonts.gstatic.com"" crossorigin>
-                <nicegui.elements.input.Input object at 0x120bee4b0>
-                <nicegui.elements.input.Input object at 0x120befbc0>
+                <nicegui.elements.input.Input object at 0x11a8cb740>
+                <nicegui.elements.input.Input object at 0x11a8cb8f0>
                 
                 <style>
                     :root {
@@ -13,6 +13,6 @@
                 </style>"," 
                 <link rel=""preconnect"" href=""https://fonts.googleapis.com"">
                 <link rel=""preconnect"" href=""https://fonts.gstatic.com"" crossorigin>
-                <nicegui.elements.input.Input object at 0x120bee4b0>
-                <nicegui.elements.input.Input object at 0x120befbc0>
+                <nicegui.elements.input.Input object at 0x11a8cb740>
+                <nicegui.elements.input.Input object at 0x11a8cb8f0>
                 "
